@@ -1,0 +1,1014 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="Phone_Fax" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Web_Site" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Item_MesurementValues">
+          <Key>
+            <PropertyRef Name="Item_ID" />
+            <PropertyRef Name="Mesurment_Value" />
+          </Key>
+          <Property Name="Item_ID" Type="int" Nullable="false" />
+          <Property Name="Mesurment_Value" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item_Store">
+          <Key>
+            <PropertyRef Name="Item_iD" />
+            <PropertyRef Name="Store_Name" />
+          </Key>
+          <Property Name="Item_iD" Type="int" Nullable="false" />
+          <Property Name="Store_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Item_Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Production_date" Type="date" Nullable="false" />
+          <Property Name="Expiry_date" Type="date" Nullable="false" />
+          <Property Name="shelf_life" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items_PayOrder">
+          <Key>
+            <PropertyRef Name="PayOrder_ID" />
+            <PropertyRef Name="Item_ID" />
+          </Key>
+          <Property Name="PayOrder_ID" Type="int" Nullable="false" />
+          <Property Name="Item_ID" Type="int" Nullable="false" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items_PurchaseOrder">
+          <Key>
+            <PropertyRef Name="PurchaseOrder_ID" />
+            <PropertyRef Name="Item_ID" />
+          </Key>
+          <Property Name="PurchaseOrder_ID" Type="int" Nullable="false" />
+          <Property Name="Item_ID" Type="int" Nullable="false" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pay_Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Supplier_ID" Type="int" />
+          <Property Name="Store_Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Purchase_Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Customer_ID" Type="int" />
+          <Property Name="Store_Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Stores">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" />
+          <Property Name="Responsible_person" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="Phone_Fax" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Web_Site" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Item_MesurementValues_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Item_MesurementValues" Type="Self.Item_MesurementValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item_MesurementValues">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Store_Items1">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Item_Store" Type="Self.Item_Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item_Store">
+              <PropertyRef Name="Item_iD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Store_Stores">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="1" />
+          <End Role="Item_Store" Type="Self.Item_Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Item_Store">
+              <PropertyRef Name="Store_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_PayOrder_Items1">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Items_PayOrder" Type="Self.Items_PayOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items_PayOrder">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_PurchaseOrder_Items1">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Items_PurchaseOrder" Type="Self.Items_PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items_PurchaseOrder">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Qty_PayOrder_Pay_Order">
+          <End Role="Pay_Order" Type="Self.Pay_Order" Multiplicity="1" />
+          <End Role="Items_PayOrder" Type="Self.Items_PayOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pay_Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items_PayOrder">
+              <PropertyRef Name="PayOrder_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Qty_PurchaseOrder_Purchase_Order">
+          <End Role="Purchase_Order" Type="Self.Purchase_Order" Multiplicity="1" />
+          <End Role="Items_PurchaseOrder" Type="Self.Items_PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase_Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items_PurchaseOrder">
+              <PropertyRef Name="PurchaseOrder_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pay_Order_Stores">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="0..1" />
+          <End Role="Pay_Order" Type="Self.Pay_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Pay_Order">
+              <PropertyRef Name="Store_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pay_Order_Suppliers">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Pay_Order" Type="Self.Pay_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pay_Order">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchase_Order_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Purchase_Order" Type="Self.Purchase_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Purchase_Order">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchase_Order_Stores">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="0..1" />
+          <End Role="Purchase_Order" Type="Self.Purchase_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Purchase_Order">
+              <PropertyRef Name="Store_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="R1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="store" Type="varchar" Mode="In" />
+          <Parameter Name="date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="R2Both" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="itemName" Type="varchar" Mode="In" />
+          <Parameter Name="store" Type="varchar" Mode="In" />
+          <Parameter Name="date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="R2Date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="itemName" Type="varchar" Mode="In" />
+          <Parameter Name="date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="R2Store" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="itemName" Type="varchar" Mode="In" />
+          <Parameter Name="store" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="R3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="store" Type="varchar" Mode="In" />
+          <Parameter Name="date1" Type="date" Mode="In" />
+          <Parameter Name="date2" Type="date" Mode="In" />
+        </Function>
+        <Function Name="R3New" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="store" Type="varchar" Mode="In" />
+          <Parameter Name="date1" Type="date" Mode="In" />
+          <Parameter Name="date2" Type="date" Mode="In" />
+        </Function>
+        <Function Name="R4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="time_interval_in_days" Type="int" Mode="In" />
+        </Function>
+        <Function Name="R5" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="time_interval_in_days" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item_MesurementValues" EntityType="Self.Item_MesurementValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item_Store" EntityType="Self.Item_Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items_PayOrder" EntityType="Self.Items_PayOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items_PurchaseOrder" EntityType="Self.Items_PurchaseOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pay_Order" EntityType="Self.Pay_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchase_Order" EntityType="Self.Purchase_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Item_MesurementValues_Items" Association="Self.FK_Item_MesurementValues_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Item_MesurementValues" EntitySet="Item_MesurementValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Store_Items1" Association="Self.FK_Item_Store_Items1">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Item_Store" EntitySet="Item_Store" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Store_Stores" Association="Self.FK_Item_Store_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Item_Store" EntitySet="Item_Store" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_PayOrder_Items1" Association="Self.FK_Items_PayOrder_Items1">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Items_PayOrder" EntitySet="Items_PayOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_PurchaseOrder_Items1" Association="Self.FK_Items_PurchaseOrder_Items1">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Items_PurchaseOrder" EntitySet="Items_PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Qty_PayOrder_Pay_Order" Association="Self.FK_Items_Qty_PayOrder_Pay_Order">
+            <End Role="Pay_Order" EntitySet="Pay_Order" />
+            <End Role="Items_PayOrder" EntitySet="Items_PayOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Qty_PurchaseOrder_Purchase_Order" Association="Self.FK_Items_Qty_PurchaseOrder_Purchase_Order">
+            <End Role="Purchase_Order" EntitySet="Purchase_Order" />
+            <End Role="Items_PurchaseOrder" EntitySet="Items_PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pay_Order_Stores" Association="Self.FK_Pay_Order_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Pay_Order" EntitySet="Pay_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pay_Order_Suppliers" Association="Self.FK_Pay_Order_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Pay_Order" EntitySet="Pay_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_Order_Customers" Association="Self.FK_Purchase_Order_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Purchase_Order" EntitySet="Purchase_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_Order_Stores" Association="Self.FK_Purchase_Order_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Purchase_Order" EntitySet="Purchase_Order" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Web_Site" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Purchase_Order" Relationship="Self.FK_Purchase_Order_Customers" FromRole="Customers" ToRole="Purchase_Order" />
+        </EntityType>
+        <EntityType Name="Item_MesurementValues">
+          <Key>
+            <PropertyRef Name="Item_ID" />
+            <PropertyRef Name="Mesurment_Value" />
+          </Key>
+          <Property Name="Item_ID" Type="Int32" Nullable="false" />
+          <Property Name="Mesurment_Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Item_MesurementValues_Items" FromRole="Item_MesurementValues" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="Item_Store">
+          <Key>
+            <PropertyRef Name="Item_iD" />
+            <PropertyRef Name="Store_Name" />
+          </Key>
+          <Property Name="Item_iD" Type="Int32" Nullable="false" />
+          <Property Name="Store_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Item_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Item_Store_Items1" FromRole="Item_Store" ToRole="Items" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Item_Store_Stores" FromRole="Item_Store" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Production_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Expiry_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="shelf_life" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item_MesurementValues" Relationship="Self.FK_Item_MesurementValues_Items" FromRole="Items" ToRole="Item_MesurementValues" />
+          <NavigationProperty Name="Item_Store" Relationship="Self.FK_Item_Store_Items1" FromRole="Items" ToRole="Item_Store" />
+          <NavigationProperty Name="Items_PayOrder" Relationship="Self.FK_Items_PayOrder_Items1" FromRole="Items" ToRole="Items_PayOrder" />
+          <NavigationProperty Name="Items_PurchaseOrder" Relationship="Self.FK_Items_PurchaseOrder_Items1" FromRole="Items" ToRole="Items_PurchaseOrder" />
+        </EntityType>
+        <EntityType Name="Items_PayOrder">
+          <Key>
+            <PropertyRef Name="PayOrder_ID" />
+            <PropertyRef Name="Item_ID" />
+          </Key>
+          <Property Name="PayOrder_ID" Type="Int32" Nullable="false" />
+          <Property Name="Item_ID" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Items_PayOrder_Items1" FromRole="Items_PayOrder" ToRole="Items" />
+          <NavigationProperty Name="Pay_Order" Relationship="Self.FK_Items_Qty_PayOrder_Pay_Order" FromRole="Items_PayOrder" ToRole="Pay_Order" />
+        </EntityType>
+        <EntityType Name="Items_PurchaseOrder">
+          <Key>
+            <PropertyRef Name="PurchaseOrder_ID" />
+            <PropertyRef Name="Item_ID" />
+          </Key>
+          <Property Name="PurchaseOrder_ID" Type="Int32" Nullable="false" />
+          <Property Name="Item_ID" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Items_PurchaseOrder_Items1" FromRole="Items_PurchaseOrder" ToRole="Items" />
+          <NavigationProperty Name="Purchase_Order" Relationship="Self.FK_Items_Qty_PurchaseOrder_Purchase_Order" FromRole="Items_PurchaseOrder" ToRole="Purchase_Order" />
+        </EntityType>
+        <EntityType Name="Pay_Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Supplier_ID" Type="Int32" />
+          <Property Name="Store_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Items_PayOrder" Relationship="Self.FK_Items_Qty_PayOrder_Pay_Order" FromRole="Pay_Order" ToRole="Items_PayOrder" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Pay_Order_Stores" FromRole="Pay_Order" ToRole="Stores" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Pay_Order_Suppliers" FromRole="Pay_Order" ToRole="Suppliers" />
+        </EntityType>
+        <EntityType Name="Purchase_Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Customer_ID" Type="Int32" />
+          <Property Name="Store_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Purchase_Order_Customers" FromRole="Purchase_Order" ToRole="Customers" />
+          <NavigationProperty Name="Items_PurchaseOrder" Relationship="Self.FK_Items_Qty_PurchaseOrder_Purchase_Order" FromRole="Purchase_Order" ToRole="Items_PurchaseOrder" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Purchase_Order_Stores" FromRole="Purchase_Order" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Responsible_person" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Item_Store" Relationship="Self.FK_Item_Store_Stores" FromRole="Stores" ToRole="Item_Store" />
+          <NavigationProperty Name="Pay_Order" Relationship="Self.FK_Pay_Order_Stores" FromRole="Stores" ToRole="Pay_Order" />
+          <NavigationProperty Name="Purchase_Order" Relationship="Self.FK_Purchase_Order_Stores" FromRole="Stores" ToRole="Purchase_Order" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Web_Site" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pay_Order" Relationship="Self.FK_Pay_Order_Suppliers" FromRole="Suppliers" ToRole="Pay_Order" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Purchase_Order_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Purchase_Order" Type="Self.Purchase_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Purchase_Order">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_MesurementValues_Items">
+          <End Role="Items" Type="Self.Item" Multiplicity="1" />
+          <End Role="Item_MesurementValues" Type="Self.Item_MesurementValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item_MesurementValues">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Store_Items1">
+          <End Role="Items" Type="Self.Item" Multiplicity="1" />
+          <End Role="Item_Store" Type="Self.Item_Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item_Store">
+              <PropertyRef Name="Item_iD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Store_Stores">
+          <End Role="Stores" Type="Self.Store" Multiplicity="1" />
+          <End Role="Item_Store" Type="Self.Item_Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Item_Store">
+              <PropertyRef Name="Store_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_PayOrder_Items1">
+          <End Role="Items" Type="Self.Item" Multiplicity="1" />
+          <End Role="Items_PayOrder" Type="Self.Items_PayOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items_PayOrder">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_PurchaseOrder_Items1">
+          <End Role="Items" Type="Self.Item" Multiplicity="1" />
+          <End Role="Items_PurchaseOrder" Type="Self.Items_PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items_PurchaseOrder">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Qty_PayOrder_Pay_Order">
+          <End Role="Pay_Order" Type="Self.Pay_Order" Multiplicity="1" />
+          <End Role="Items_PayOrder" Type="Self.Items_PayOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pay_Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items_PayOrder">
+              <PropertyRef Name="PayOrder_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Qty_PurchaseOrder_Purchase_Order">
+          <End Role="Purchase_Order" Type="Self.Purchase_Order" Multiplicity="1" />
+          <End Role="Items_PurchaseOrder" Type="Self.Items_PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase_Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items_PurchaseOrder">
+              <PropertyRef Name="PurchaseOrder_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pay_Order_Stores">
+          <End Role="Stores" Type="Self.Store" Multiplicity="0..1" />
+          <End Role="Pay_Order" Type="Self.Pay_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Pay_Order">
+              <PropertyRef Name="Store_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pay_Order_Suppliers">
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Pay_Order" Type="Self.Pay_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pay_Order">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchase_Order_Stores">
+          <End Role="Stores" Type="Self.Store" Multiplicity="0..1" />
+          <End Role="Purchase_Order" Type="Self.Purchase_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Purchase_Order">
+              <PropertyRef Name="Store_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="commercial_systemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Item_MesurementValues" EntityType="Self.Item_MesurementValues" />
+          <EntitySet Name="Item_Store" EntityType="Self.Item_Store" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="Items_PayOrder" EntityType="Self.Items_PayOrder" />
+          <EntitySet Name="Items_PurchaseOrder" EntityType="Self.Items_PurchaseOrder" />
+          <EntitySet Name="Pay_Order" EntityType="Self.Pay_Order" />
+          <EntitySet Name="Purchase_Order" EntityType="Self.Purchase_Order" />
+          <EntitySet Name="Stores" EntityType="Self.Store" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_Purchase_Order_Customers" Association="Self.FK_Purchase_Order_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Purchase_Order" EntitySet="Purchase_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_MesurementValues_Items" Association="Self.FK_Item_MesurementValues_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Item_MesurementValues" EntitySet="Item_MesurementValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Store_Items1" Association="Self.FK_Item_Store_Items1">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Item_Store" EntitySet="Item_Store" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Store_Stores" Association="Self.FK_Item_Store_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Item_Store" EntitySet="Item_Store" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_PayOrder_Items1" Association="Self.FK_Items_PayOrder_Items1">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Items_PayOrder" EntitySet="Items_PayOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_PurchaseOrder_Items1" Association="Self.FK_Items_PurchaseOrder_Items1">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Items_PurchaseOrder" EntitySet="Items_PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Qty_PayOrder_Pay_Order" Association="Self.FK_Items_Qty_PayOrder_Pay_Order">
+            <End Role="Pay_Order" EntitySet="Pay_Order" />
+            <End Role="Items_PayOrder" EntitySet="Items_PayOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Qty_PurchaseOrder_Purchase_Order" Association="Self.FK_Items_Qty_PurchaseOrder_Purchase_Order">
+            <End Role="Purchase_Order" EntitySet="Purchase_Order" />
+            <End Role="Items_PurchaseOrder" EntitySet="Items_PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pay_Order_Stores" Association="Self.FK_Pay_Order_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Pay_Order" EntitySet="Pay_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pay_Order_Suppliers" Association="Self.FK_Pay_Order_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Pay_Order" EntitySet="Pay_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_Order_Stores" Association="Self.FK_Purchase_Order_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Purchase_Order" EntitySet="Purchase_Order" />
+          </AssociationSet>
+          <FunctionImport Name="R1" ReturnType="Collection(Model.R1_Result)">
+            <Parameter Name="store" Mode="In" Type="String" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="R2" ReturnType="Collection(Model.R2_Result)">
+            <Parameter Name="itemName" Mode="In" Type="String" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="R3" ReturnType="Collection(Model.R3_Result)">
+            <Parameter Name="store" Mode="In" Type="String" />
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="R4" ReturnType="Collection(Model.R4_Result)">
+          <Parameter Name="time_interval_in_days" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="R5" ReturnType="Collection(Model.R5_Result)">
+          <Parameter Name="time_interval_in_days" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="R2Both" ReturnType="Collection(Model.R2Both_Result)">
+            <Parameter Name="itemName" Mode="In" Type="String" />
+            <Parameter Name="store" Mode="In" Type="String" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="R2Date" ReturnType="Collection(Model.R2Date_Result)">
+            <Parameter Name="itemName" Mode="In" Type="String" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="R2Store" ReturnType="Collection(Model.R2Store_Result)">
+            <Parameter Name="itemName" Mode="In" Type="String" />
+            <Parameter Name="store" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="R3New" ReturnType="Collection(Model.R3New_Result)">
+            <Parameter Name="store" Mode="In" Type="String" />
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="R1_Result">
+          <Property Type="Int32" Name="item_ID" Nullable="false" />
+          <Property Type="String" Name="item_name" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Production_date" Nullable="false" />
+          <Property Type="DateTime" Name="Expiry_date" Nullable="false" />
+          <Property Type="String" Name="Store_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="DateTime" Name="entered_store" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="R2_Result">
+          <Property Type="Int32" Name="item_ID" Nullable="false" />
+          <Property Type="String" Name="item_name" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Production_date" Nullable="false" />
+          <Property Type="DateTime" Name="Expiry_date" Nullable="false" />
+          <Property Type="String" Name="Store_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="DateTime" Name="entered_store" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="R3_Result">
+          <Property Type="Int32" Name="item_ID" Nullable="false" />
+          <Property Type="String" Name="item_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Store_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="DateTime" Name="entered_store" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="R4_Result">
+          <Property Type="Int32" Name="item_ID" Nullable="false" />
+          <Property Type="String" Name="item_name" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Production_date" Nullable="false" />
+          <Property Type="DateTime" Name="Expiry_date" Nullable="false" />
+          <Property Type="String" Name="Store_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="DateTime" Name="entered_store" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="R5_Result">
+          <Property Type="Int32" Name="item_ID" Nullable="false" />
+          <Property Type="String" Name="item_name" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Production_date" Nullable="false" />
+          <Property Type="DateTime" Name="Expiry_date" Nullable="false" />
+          <Property Type="Int32" Name="shelf_life" Nullable="false" />
+          <Property Type="String" Name="Store_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="DateTime" Name="entered_store" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="R2Both_Result">
+          <Property Type="Int32" Name="item_ID" Nullable="false" />
+          <Property Type="String" Name="item_name" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Production_date" Nullable="false" />
+          <Property Type="DateTime" Name="Expiry_date" Nullable="false" />
+          <Property Type="String" Name="Store_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="DateTime" Name="entered_store" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="R2Date_Result">
+          <Property Type="Int32" Name="item_ID" Nullable="false" />
+          <Property Type="String" Name="item_name" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Production_date" Nullable="false" />
+          <Property Type="DateTime" Name="Expiry_date" Nullable="false" />
+          <Property Type="String" Name="Store_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="DateTime" Name="entered_store" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="R2Store_Result">
+          <Property Type="Int32" Name="item_ID" Nullable="false" />
+          <Property Type="String" Name="item_name" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Production_date" Nullable="false" />
+          <Property Type="DateTime" Name="Expiry_date" Nullable="false" />
+          <Property Type="String" Name="Store_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="DateTime" Name="entered_store" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="R3New_Result">
+          <Property Type="Int32" Name="Item_ID" Nullable="false" />
+          <Property Type="Int32" Name="qty" Nullable="false" />
+          <Property Type="String" Name="status" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Store_Name" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Date" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="commercial_systemEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="Model.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Phone_Fax" ColumnName="Phone_Fax" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Web_Site" ColumnName="Web_Site" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item_MesurementValues">
+            <EntityTypeMapping TypeName="Model.Item_MesurementValues">
+              <MappingFragment StoreEntitySet="Item_MesurementValues">
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+                <ScalarProperty Name="Mesurment_Value" ColumnName="Mesurment_Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item_Store">
+            <EntityTypeMapping TypeName="Model.Item_Store">
+              <MappingFragment StoreEntitySet="Item_Store">
+                <ScalarProperty Name="Item_iD" ColumnName="Item_iD" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="Model.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Production_date" ColumnName="Production_date" />
+                <ScalarProperty Name="Expiry_date" ColumnName="Expiry_date" />
+                <ScalarProperty Name="shelf_life" ColumnName="shelf_life" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items_PayOrder">
+            <EntityTypeMapping TypeName="Model.Items_PayOrder">
+              <MappingFragment StoreEntitySet="Items_PayOrder">
+                <ScalarProperty Name="PayOrder_ID" ColumnName="PayOrder_ID" />
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items_PurchaseOrder">
+            <EntityTypeMapping TypeName="Model.Items_PurchaseOrder">
+              <MappingFragment StoreEntitySet="Items_PurchaseOrder">
+                <ScalarProperty Name="PurchaseOrder_ID" ColumnName="PurchaseOrder_ID" />
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pay_Order">
+            <EntityTypeMapping TypeName="Model.Pay_Order">
+              <MappingFragment StoreEntitySet="Pay_Order">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchase_Order">
+            <EntityTypeMapping TypeName="Model.Purchase_Order">
+              <MappingFragment StoreEntitySet="Purchase_Order">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="Model.Store">
+              <MappingFragment StoreEntitySet="Stores">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Responsible_person" ColumnName="Responsible_person" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="Model.Supplier">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Phone_Fax" ColumnName="Phone_Fax" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Web_Site" ColumnName="Web_Site" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="R1" FunctionName="Model.Store.R1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.R1_Result">
+                <ScalarProperty Name="item_ID" ColumnName="item_ID" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="Production_date" ColumnName="Production_date" />
+                <ScalarProperty Name="Expiry_date" ColumnName="Expiry_date" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="entered_store" ColumnName="entered store" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="R3" FunctionName="Model.Store.R3">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.R3_Result">
+                <ScalarProperty Name="item_ID" ColumnName="item_ID" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="entered_store" ColumnName="entered store" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="R4" FunctionName="Model.Store.R4">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.R4_Result">
+                <ScalarProperty Name="item_ID" ColumnName="item_ID" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="Production_date" ColumnName="Production_date" />
+                <ScalarProperty Name="Expiry_date" ColumnName="Expiry_date" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="entered_store" ColumnName="entered store" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="R5" FunctionName="Model.Store.R5">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.R5_Result">
+                <ScalarProperty Name="item_ID" ColumnName="item_ID" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="Production_date" ColumnName="Production_date" />
+                <ScalarProperty Name="Expiry_date" ColumnName="Expiry_date" />
+                <ScalarProperty Name="shelf_life" ColumnName="shelf_life" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="entered_store" ColumnName="entered store" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="R2Both" FunctionName="Model.Store.R2Both">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.R2Both_Result">
+                <ScalarProperty Name="item_ID" ColumnName="item_ID" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="Production_date" ColumnName="Production_date" />
+                <ScalarProperty Name="Expiry_date" ColumnName="Expiry_date" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="entered_store" ColumnName="entered store" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="R2Date" FunctionName="Model.Store.R2Date">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.R2Date_Result">
+                <ScalarProperty Name="item_ID" ColumnName="item_ID" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="Production_date" ColumnName="Production_date" />
+                <ScalarProperty Name="Expiry_date" ColumnName="Expiry_date" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="entered_store" ColumnName="entered store" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="R2Store" FunctionName="Model.Store.R2Store">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.R2Store_Result">
+                <ScalarProperty Name="item_ID" ColumnName="item_ID" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="Production_date" ColumnName="Production_date" />
+                <ScalarProperty Name="Expiry_date" ColumnName="Expiry_date" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="entered_store" ColumnName="entered store" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="R3New" FunctionName="Model.Store.R3New">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.R3New_Result">
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

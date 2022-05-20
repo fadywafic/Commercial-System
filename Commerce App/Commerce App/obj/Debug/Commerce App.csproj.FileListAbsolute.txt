@@ -1,0 +1,20 @@
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\bin\Debug\Commerce App.exe.config
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\bin\Debug\Commerce App.exe
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\bin\Debug\Commerce App.pdb
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\bin\Debug\EntityFramework.dll
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\bin\Debug\EntityFramework.xml
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\obj\Debug\Commerce App.csproj.AssemblyReference.cache
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\obj\Debug\Commerce_App.Form1.resources
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\obj\Debug\Commerce_App.Properties.Resources.resources
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\obj\Debug\Commerce App.csproj.GenerateResource.cache
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\obj\Debug\Commerce App.csproj.CoreCompileInputs.cache
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\obj\Debug\Commerce App.csproj.CopyComplete
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\obj\Debug\Commerce App.exe
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\obj\Debug\Commerce App.pdb
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\obj\Debug\Commerce_App.DialogeBox1.resources
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
+C:\Users\Fady\Desktop\iti\projects\LinQ & EF commerical company system\Commerce App\Commerce App\bin\Debug\Microsoft.SqlServer.Types.dll
